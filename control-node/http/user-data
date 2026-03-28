@@ -1,0 +1,69 @@
+#cloud-config
+autoinstall:
+  version: 1
+  locale: en_US
+  keyboard:
+    layout: us
+  identity:
+    hostname: control-node
+    username: control
+    password: "$6$gB2.dAvmdZLGi2Rb$4BoE1cWaoZedQqr6sWbhhCWEhKoe9G2nhIV1lfnGa9wyVSJk2CGaWDyRaCQI55KGy/9lxr9bdWxODtSup905V0"
+  ssh:
+    install-server: true
+    allow-pw: true
+    authorized-keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGr2ayh4QvjTYyoiOp17Ll9yW93f7sU89YC5wTiy9WO2
+  network:
+    network:
+      version: 2
+      ethernets:
+        any:
+          match:
+            name: en*
+          dhcp4: true
+          dhcp6: false
+  packages:
+    - qemu-guest-agent
+    - sudo
+    - openssh-server
+    - curl
+    - wget
+    - git
+    - vim
+    - jq
+    - python3
+    - python3-pip
+    - python3-venv
+    - ca-certificates
+    - gnupg
+    - lsb-release
+    - apt-transport-https
+  storage:
+    layout:
+      name: direct
+    swap:
+      size: 0
+  user-data:
+    package_upgrade: false
+    timezone: UTC
+    disable_root: true
+
+    runcmd:
+      - apt-get update
+      - apt-get install -y docker.io docker-compose ansible
+      - usermod -aG docker control
+      - docker pull hashicorp/packer:latest
+      - docker pull hashicorp/terraform:latest
+
+  late-commands:
+    - curtin in-target -- systemctl enable ssh
+    - curtin in-target -- systemctl start ssh
+    - |
+      if [ -d /sys/firmware/efi ]; then
+        apt-get install -y efibootmgr
+        efibootmgr -o $(efibootmgr | perl -n -e '/Boot(.+)\* Ubuntu/ && print $1')
+      fi
+  shutdown: poweroff
+
+  # Force non-interactive installation
+  interactive-sections: []
