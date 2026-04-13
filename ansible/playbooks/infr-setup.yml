@@ -1,0 +1,8 @@
+- name: Create LXC Bot
+  hosts: proxmox
+  roles: 
+
+# - name: Create LXC Nginx
+# - name: Create LXC Jenkins
+# - name: Create LXC Postgresql
+

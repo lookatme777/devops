@@ -1,0 +1,10 @@
+- name: Update apt
+  apt:
+    update_cache: yes # analogue apt update
+
+- name: Install dependencies
+  apt:
+    name: 
+      - ca-certificates
+      - curl
+    state: present
