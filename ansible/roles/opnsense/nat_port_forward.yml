@@ -1,0 +1,39 @@
+- name: Configure NAT Port Forward
+  hosts: localhost
+  gather_facts: no
+  vars:
+    opnsense_host: "182.17.1.1"
+    api_key: "1iRhr53WBttXFN2GJi2wSYNtsUmfFH/F6DL1zzViOVVxCffVSsaVtydoA27pZ2laUfgyGvEYSq6shPvv"
+    api_secret: "5DKBgs+co9F9zgvz2fIQUvOz4OHKKexLVEgWGrgI9VQDCs/m7nb+AMIYbp4gnreuncW5rT7wt3kd/hki"
+    target_ip: "192.168.1.10"
+    free_port: 2222  # сюда динамически можно подставить порт от бота
+
+  tasks:
+    - name: Add NAT rule
+      uri:
+        url: "https://{{ opnsense_host }}/api/firewall/nat/addPortForward"
+        method: POST
+        user: "{{ api_key }}"
+        password: "{{ api_secret }}"
+        force_basic_auth: yes
+        validate_certs: no
+        body_format: json
+        body:
+          rule:
+            interface: "wan"
+            protocol: "tcp"
+            destination_port: "{{ free_port }}"
+            target: "{{ target_ip }}"
+            local_port: "22"
+            descr: "User SSH"
+            enabled: "1"
+      register: nat_result
+
+    - name: Apply NAT changes
+      uri:
+        url: "https://{{ opnsense_host }}/api/firewall/nat/apply"
+        method: POST
+        user: "{{ api_key }}"
+        password: "{{ api_secret }}"
+        force_basic_auth: yes
+        validate_certs: no

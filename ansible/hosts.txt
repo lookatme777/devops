@@ -1,0 +1,8 @@
+[jenkins]
+182.17.1.51 ansible_user=root
+
+[postgresql]
+182.17.1.52 ansible_user=root
+
+[bot]
+182.17.1.53 ansible_user=root

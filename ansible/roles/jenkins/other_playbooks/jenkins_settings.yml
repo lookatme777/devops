@@ -1,0 +1,41 @@
+- name: Auto Setup Jenkins
+  hosts: jenkins
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Disable Jenkins setup wizard
+      lineinfile:
+        dest: /etc/default/jenkins
+        regexp: '^JAVA_ARGS='
+        line: 'JAVA_ARGS="-Djava.awt.headless=true -Djenkins.install.runSetupWizard=false"'
+      notify: restart jenkins
+      become: true
+
+    - name: Restart Jenkins
+      service: 
+        name: jenkins
+        state: restarted
+    
+    - name: Ensure init.groovy.d exists
+      file:
+        path: /var/lib/jenkins/init.groovy.d
+        state: directory
+        owner: jenkins
+        group: jenkins
+        mode: '0755'
+
+    - name: Copy Groovy script to Jenkins
+      copy:
+        src: 01-users.groovy
+        dest: /var/lib/jenkins/init.groovy.d/01-users.groovy
+        owner: jenkins
+        group: jenkins
+        mode: '0644'
+    
+    - name: Restart Jenkins
+      service:
+        name: jenkins
+        state: restarted
+
+    

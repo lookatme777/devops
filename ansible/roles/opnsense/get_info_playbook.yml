@@ -1,0 +1,23 @@
+- name: OPNsense API test                                                                           # name playbook
+  hosts: localhost                                                                                  # where playbook is playing
+  gather_facts: false                                                                               # doesnt parse info system
+
+  vars:
+    host: "182.17.1.1"                                                                              # ip opnsense
+    api_key: "1iRhr53WBttXFN2GJi2wSYNtsUmfFH/F6DL1zzViOVVxCffVSsaVtydoA27pZ2laUfgyGvEYSq6shPvv"     # key
+    api_secret: "5DKBgs+co9F9zgvz2fIQUvOz4OHKKexLVEgWGrgI9VQDCs/m7nb+AMIYbp4gnreuncW5rT7wt3kd/hki"  # secret
+
+  tasks:
+    - name: Get firmware info
+      ansible.builtin.uri:                                                                          # module for parse info
+        url: "https://{{ host }}/api/core/firmware/status"                                          # url get info
+        method: GET                                                                                 # method
+        user: "{{ api_key }}"                                                                       # log
+        password: "{{ api_secret }}"                                                                # pass
+        force_basic_auth: true
+        validate_certs: false                                                                       # ignore SSL
+      register: result                                                                              # where save info to file
+    
+    - name: Show debug
+      ansible.builtin.debug:                                                                        # module for output
+        var: result.json                                                                            # show info in json

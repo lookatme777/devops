@@ -1,3 +1,7 @@
 /packer
-/ansible
+/ansible/opnsense
+/ansible/nginx
+/ansible/postgresql
 /terraform
+/opnsense
+/LXC

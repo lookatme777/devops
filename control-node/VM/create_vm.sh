@@ -37,34 +37,28 @@ qm create $vmid \
     --net0 $net 
 
 # ---------------------------
-# 2. BIOS/UEFI и efidisk
-# ---------------------------
-#qm set $vmid --bios ovmf
-#qm set $vmid --efidisk0 local-lvm:${efidisk_size}
-
-# ---------------------------
-# 3. Main disk
+# 2. Main disk
 # ---------------------------
 qm set $vmid --scsi0 local-lvm:$disk_size
 
 # ---------------------------
-# 4. ISO disk
+# 3. ISO disk
 # ---------------------------
 qm set $vmid --ide2 $nocloud_iso,media=cdrom
 
 # ---------------------------
-# 5. Boot order
+# 4. Boot order
 # ---------------------------
 qm set $vmid --boot 'order=ide2;scsi0'
 
 # ---------------------------
-# 6. Start VM
+# 5. Start VM
 # ---------------------------
 qm start $vmid
 echo "VM $vmid is starting... waiting for autoinstall to complete."
 
 # ---------------------------
-# 7. Waiting poweroff VM
+# 6. Waiting poweroff VM
 # ---------------------------
 while [[ $(qm status $vmid) != "status: stopped" ]]; do
     echo "Waiting for VM to finish autoinstall..."
@@ -72,7 +66,7 @@ while [[ $(qm status $vmid) != "status: stopped" ]]; do
 done
 
 # ---------------------------
-# 8. Disable ISO + fix boot
+# 7. Disable ISO + fix boot
 # ---------------------------
 qm set $vmid --cdrom none
 qm set $vmid --delete ide2
@@ -81,7 +75,7 @@ qm set $vmid --boot 'order=scsi0;net0'
 echo "ISO disconnected. Boot order set to disk."
 
 # ---------------------------
-# 9. Start installed system
+# 8. Start installed system
 # ---------------------------
 qm start $vmid
 

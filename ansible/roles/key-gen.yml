@@ -1,0 +1,9 @@
+- name: Generate SSH key on Control Node
+  hosts: localhost
+  gather_facts: false
+
+  task: 
+    - name: Generate ssh key
+      ansible.builtin.openssh_keypair:
+        path: "~/.ssh/id_ed25519"
+        type: ed25519

@@ -1,0 +1,30 @@
+- name: Get config.xml from OPNsense
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    host: "182.17.1.1"
+    api_key: "1iRhr53WBttXFN2GJi2wSYNtsUmfFH/F6DL1zzViOVVxCffVSsaVtydoA27pZ2laUfgyGvEYSq6shPvv"
+    api_secret: "5DKBgs+co9F9zgvz2fIQUvOz4OHKKexLVEgWGrgI9VQDCs/m7nb+AMIYbp4gnreuncW5rT7wt3kd/hki"
+    output_file: "/home/config.xml"
+
+  tasks:
+    - name: Fetch config.xml
+      ansible.builtin.uri:
+        url: "https://{{ host }}/api/core/backup/download/this"
+        method: GET
+        user: "{{ api_key }}"
+        password: "{{ api_secret }}"
+        force_basic_auth: true
+        validate_certs: false
+        return_content: true      # <-- this is critical!
+      register: result
+
+    - name: Debug the registered result
+      ansible.builtin.debug:
+        var: result
+
+    - name: Save config.xml to disk
+      ansible.builtin.copy:
+        content: "{{ result.content }}"   # <-- use .content now
+        dest: "{{ output_file }}"
