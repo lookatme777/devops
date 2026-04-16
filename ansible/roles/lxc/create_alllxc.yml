@@ -16,7 +16,7 @@
         cores: "{{ item.cores }}"
         memory: "{{ item.memory }}"
         netif:
-          net0: "name=eth0,bridge={{ item.bridge }},ip=dhcp"
+          net0: "name=eth0,bridge={{ item.bridge }},ip={{ item.ip }}/16,gw=182.17.1.1"
         storage: "{{ storage }}"
         state: present
       loop: "{{ lxc_containers }}"
