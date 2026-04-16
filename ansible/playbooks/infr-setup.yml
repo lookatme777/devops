@@ -1,5 +1,5 @@
 - name: Create LXC Bot
-  hosts: proxmox
+  hosts: localhost
   roles: 
     - lxc
 
