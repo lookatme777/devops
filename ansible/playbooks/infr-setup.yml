@@ -3,8 +3,8 @@
   roles: 
     - lxc
 
-- name: Configure Bot
-  hosts: telegram-lxc
+# - name: Configure Bot
+#   hosts: telegram-lxc
 
 # - name: Configure Jenkins
 #   hosts: jenkins_lxc
