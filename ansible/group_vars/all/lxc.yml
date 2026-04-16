@@ -1,0 +1,25 @@
+lxc_containers:
+## Telegram Bot LXC
+  - vmid: 802
+    hostname: "telegram-lxc"
+    cores: 4
+    memory: 2048
+
+## Telegram Jenkins LXC
+  - vmid: 801
+    hostname: "jenkins-lxc"
+    cores: 2
+    memory: 2048
+
+## Nginx LXC
+  - vmid: 803
+    hostname: "nginx-lxc"
+    cores: 2
+    memory: 2048
+
+## Postgresql LXC
+  - vmid: 804
+    hostname: "postgresql-lxc"
+    cores: 2
+    memory: 2048
+

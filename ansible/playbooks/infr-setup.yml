@@ -1,8 +1,18 @@
 - name: Create LXC Bot
   hosts: proxmox
   roles: 
+    - lxc
 
-# - name: Create LXC Nginx
-# - name: Create LXC Jenkins
-# - name: Create LXC Postgresql
+- name: Configure Bot
+  hosts: telegram_lxc
+
+# - name: Configure Jenkins
+#   hosts: jenkins_lxc
+
+# - name: Configure Postgresql
+#   hosts: db_lxc
+
+# - name: Configure Nginx
+#   hosts: nginx_lxc
+
 

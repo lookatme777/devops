@@ -1,7 +1,0 @@
-## Telegram Jenkins LXC
-jvmid: 801
-jhostname: "jenkins-lxc"
-jcores: 2
-jip: 182.17.1.51
-jmemory: 2048
-

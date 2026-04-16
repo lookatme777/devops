@@ -7,4 +7,3 @@ storage: "local-lvm"
 bridge: vmbr1
 cidr: 16
 gateway: 182.17.1.1
-
