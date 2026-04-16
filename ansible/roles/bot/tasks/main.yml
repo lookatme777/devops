@@ -1,5 +1,4 @@
-- import_tasks: lxc_create.yml
 - import_tasks: install.yml
-- import_task: repo.yml
-- import_task: install_docker.yml
-- import_task: users.yml
+- import_tasks: repo.yml
+- import_tasks: install_docker.yml
+- import_tasks: users.yml
