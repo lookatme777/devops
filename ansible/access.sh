@@ -1,12 +1,11 @@
 #!/bin/bash
+set -eu
 
-user="ansible@pve"
-token="tokenansible"
-file="/root/credprox.json"
+source ./bash.cfg
 
 # Create user if not exist
-pveum user list | grep -q "ansible@pve" || \
-pveum user add ansible@pve --password secret123
+pveum user list | grep -q $user || \
+pveum user add ansible@pve --password $password
 
 # ACL
 pveum aclmod / -user ansible@pve -role Administrator
@@ -17,6 +16,7 @@ pveum user token list $user | grep -q "$token" && \
 pveum user token remove $user $token
 
 # Create fresh token
-pveum user token add $user $token --privsep 0 --output-format json > /root/credprox.json
+pveum user token add $user $token --privsep 0 \ 
+--output-format json > /root/credprox.json
 
 echo "Credentials was create"

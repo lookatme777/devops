@@ -4,3 +4,4 @@ nhostname: "nginx-lxc"
 ncores: 2
 nmemory: 2048
 npassword: "sroot123"
+tip: 182.17.1.54

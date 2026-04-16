@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e                  # error - stop script
+set -eu                  # error - stop script
 
 # ---------------------------
 # Param VM

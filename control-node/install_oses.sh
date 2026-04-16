@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eu
 
 apt install -y xorriso isolinux  # install required tools
 

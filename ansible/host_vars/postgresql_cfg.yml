@@ -1,6 +1,6 @@
 ## Postgresql LXC
 pvmid: 801
-phostname: "jenkins-lxc"
+phostname: "postgresql-lxc"
 pcores: 2
 pmemory: 2048
 pip: 182.17.1.52
