@@ -3,8 +3,21 @@
   roles: 
     - lxc
 
-# - name: Configure Bot
-#   hosts: telegram-lxc
+- name: Wait for SSH
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Wait for containers
+      wait_for:
+        host: "{{ item.ip }}"
+        port: 22
+        timeout: 120
+      loop: "{{ lxc_containers }}"
+
+- name: Configure Bot
+  hosts: telegram-lxc
+  roles:
+    - bot
 
 # - name: Configure Jenkins
 #   hosts: jenkins_lxc

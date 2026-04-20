@@ -1,0 +1,9 @@
+## Proxmox creds
+api_proxmox: "192.168.1.130"
+api_user: "ansible@pve"
+node: "pve"
+path: "local:vztmpl/debian-13-standard_13.1-2_amd64.tar.zst"
+storage: "local-lvm"
+bridge: vmbr1
+cidr: 16
+gateway: 182.17.1.1

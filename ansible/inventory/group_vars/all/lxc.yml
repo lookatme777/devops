@@ -1,0 +1,39 @@
+## Proxmox creds
+api_proxmox: "192.168.1.130"
+api_user: "ansible@pve"
+node: "pve"
+path: "local:vztmpl/debian-13-standard_13.1-2_amd64.tar.zst"
+storage: "local-lvm"
+bridge: vmbr1
+cidr: 16
+gateway: 182.17.1.1
+
+
+lxc_containers:
+## Telegram Bot LXC
+  - vmid: 802
+    hostname: "telegram-lxc"
+    cores: 4
+    memory: 2048
+    ip: 182.17.1.53
+
+# ## Jenkins LXC
+#   - vmid: 801
+#     hostname: "jenkins-lxc"
+#     cores: 2
+#     memory: 2048
+#     ip: 182.17.1.51
+
+# ## Nginx LXC
+#   - vmid: 803
+#     hostname: "nginx-lxc"
+#     cores: 2
+#     memory: 2048
+#     ip: 182.17.1.54
+
+# ## Postgresql LXC
+#   - vmid: 804
+#     hostname: "postgresql-lxc"
+#     cores: 2
+#     memory: 2048
+#     ip: 182.17.1.52

@@ -1,0 +1,4 @@
+- import_tasks: install.yml
+- import_tasks: repo.yml
+- import_tasks: install_postgresql.yml
+- import_tasks: users.yml

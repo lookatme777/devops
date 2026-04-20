@@ -1,0 +1,26 @@
+- name: Create keyrings directory
+  file:
+    path: /usr/share/postgresql-common/pgdg
+    state: directory
+    mode: '0755'
+  
+- name: Add Postgresql ASC key
+  ansible.builtin.get_url:
+    url: "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
+    dest: "/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc"
+    mode: '0644'
+
+- name: Add Postgresql repo
+  copy: 
+    dest: /etc/apt/sources.list.d/pgdg.sources
+    content: | 
+      Types: deb
+      URIs: https://apt.postgresql.org/pub/repos/apt
+      Suites: trixie
+      Components: stable
+      Architectures: amd64
+      Signed-By: /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc
+
+- name: Update apt cache
+  apt: 
+    update_cache: yes

@@ -1,0 +1,6 @@
+- name: Install docker
+  apt:
+    name:
+      - postgresql-18
+    state: present
+    update_cache: yes

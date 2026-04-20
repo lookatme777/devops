@@ -19,5 +19,5 @@
           net0: name=eth0,bridge=vmbr1,ip=182.17.1.51/16,gw=182.17.1.1
         storage: "{{ storage }}"
         state: present                                # status system(latest - download&update, present - download, absent - delete)
-        ssh_public_key: "{{ lookup('file', '~/.ssh/id_ed25519.pub') }}"
+        pubkey: "{{ lookup('file', '~/.ssh/id_ed25519.pub') }}"
         timeout: 900

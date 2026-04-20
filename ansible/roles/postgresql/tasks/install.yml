@@ -1,0 +1,10 @@
+- name: Update apt
+  apt:
+    update_cache: yes
+
+- name: Install dependencies
+  apt:
+    name:
+      - postgresql-18
+    state: present
+    update_cache: yes

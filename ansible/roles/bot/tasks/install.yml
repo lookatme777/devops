@@ -7,4 +7,6 @@
     name: 
       - ca-certificates
       - curl
+      - gnupg
     state: present
+    update_cache: yes
