@@ -1,4 +1,4 @@
-- name: Create LXC Bot
+- name: Create LXC
   hosts: localhost
   roles: 
     - lxc
@@ -19,6 +19,11 @@
   roles:
     - bot
 
+- name: Configure Postgresql
+  hosts: db-lxc
+  roles:
+    - postgresql
+    
 # - name: Configure Jenkins
 #   hosts: jenkins_lxc
 

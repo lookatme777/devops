@@ -1,3 +1,7 @@
+- name: DEBUG repo start
+  debug:
+    msg: "repo.yml start"
+
 - name: Create keyrings directory
   file:
     path: /usr/share/postgresql-common/pgdg
@@ -13,10 +17,10 @@
 - name: Add Postgresql repo
   copy: 
     dest: /etc/apt/sources.list.d/pgdg.sources
-    content: | 
+    content: |
       Types: deb
       URIs: https://apt.postgresql.org/pub/repos/apt
-      Suites: trixie
+      Suites: trixie-pgdg
       Components: stable
       Architectures: amd64
       Signed-By: /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc
